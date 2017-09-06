@@ -109,7 +109,7 @@ namespace LiveSplit.SteamWorldDig {
             List<IntPtr> areas_ptrs = FindAllAreaEntries();
             foreach (IntPtr ptr in areas_ptrs)
             {
-                byte[] segment = Program.Read(ptr - 0x1C, 0x18);
+                byte[] segment = Program.Read(ptr - 0x1C, 0x34);
                 string key;
                 if (Program.Read<int>(ptr - 0x0c) < 0x10)
                 {
@@ -120,27 +120,13 @@ namespace LiveSplit.SteamWorldDig {
                     key = Program.ReadAscii((IntPtr)Program.Read<uint>(ptr - 0x1C));
                 }
 
-                // Don't randomize the boss room and the generators
-                if (!key.Contains("boss") && key != "oldworld")
+                // Don't randomize the boss room
+                if (!key.Contains("boss"))
                 {
                     areaSegments[key] = segment;
                     areaPointers[key] = ptr - 0x1C;
                 }
             }
-        }
-
-        public string PrintAllAreaEntries()
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach (var ptr in areaPointers)
-            {
-                sb.Append(ptr.Key).Append(',');
-            }
-            if (sb.Length > 0)
-            {
-                sb.Length--;
-            }
-            return sb.ToString();
         }
 
         public List<string> GetAreaNames()
@@ -150,9 +136,13 @@ namespace LiveSplit.SteamWorldDig {
             return areas;
         }
 
+        public string PrintAllAreaEntries()
+        {
+            return String.Join(", ", GetAreaNames());
+        }
+
         public List<IntPtr> FindAllAreaExits()
         {
-            // First locate all occurences of "[start]"
             List<IntPtr> areas = Program.FindAllSignatures("PlayerExit1");
             areas.AddRange(Program.FindAllSignatures("PlayerExit2"));
 
@@ -186,6 +176,26 @@ namespace LiveSplit.SteamWorldDig {
                     key = Program.ReadAscii((IntPtr)Program.Read<uint>(ptr + 0x40));
                 }
 
+                // Special case: Vectron entry is marked as an exit, so inserting it in the entries
+                if (key == "from_oldworld")
+                {
+                    string to = Program.ReadAscii(ptr + 0x24);
+                    if (to == "vectron")
+                    {
+                        areaSegments["vectron"] = segment;
+                        areaPointers["vectron"] = ptr + 0x24;
+                        continue;
+                    }
+                }
+
+                // Insert the vectron exit manually because we may not have inserted the vectron entry yet.
+                if (key == "from_vectron")
+                {
+                    exitSegments["vectron"] = segment;
+                    exitPointers["vectron"] = ptr + 0x24;
+                    continue;
+                }
+
                 // Filter keys that are not "from_xxx" where xxx is an area entry
                 foreach (var entryptr in areaPointers)
                 {
@@ -199,18 +209,16 @@ namespace LiveSplit.SteamWorldDig {
             }
         }
 
+        public List<string> GetExitNames()
+        {
+            List<string> areas = new List<string>(exitPointers.Keys);
+            areas.Sort();
+            return areas;
+        }
+
         public string PrintAllAreaExits()
         {
-            StringBuilder sb = new StringBuilder();
-            foreach (var ptr in exitPointers)
-            {
-                sb.Append(ptr.Key).Append(',');
-            }
-            if (sb.Length > 0)
-            {
-                sb.Length--;
-            }
-            return sb.ToString();
+            return String.Join(", ", GetExitNames());
         }
 
         public void RandomizeArea(string oldArea, string newArea)

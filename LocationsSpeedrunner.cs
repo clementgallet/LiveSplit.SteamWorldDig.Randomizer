@@ -51,45 +51,52 @@ namespace LiveSplit.SteamWorldDig {
                 },
                 new Location
                 {
+                    Name = "oldworld",
+                    Grant = "oldworld", // randomized
+                    Type = Location.RandomizeType.Area,
+                    CanAccess = have => CanBreak(have)
+                },
+                new Location
+                {
                     Name = "oldworld_cave_2",
                     Grant = "oldworld_cave_2", // randomized
                     Type = Location.RandomizeType.Area,
-                    CanAccess = have => CanBreak(have)
+                    CanAccess = have => have.Contains("oldworld")
                 },
                 new Location
                 {
                     Name = "oldworld_cave_dynamite",
                     Grant = "oldworld_cave_dynamite", // randomized
                     Type = Location.RandomizeType.Area,
-                    CanAccess = have => CanBreak(have)
+                    CanAccess = have => have.Contains("oldworld")
                 },
                 new Location
                 {
                     Name = "oldworld_cave_3",
                     Grant = "oldworld_cave_3", // randomized
                     Type = Location.RandomizeType.Area,
-                    CanAccess = have => CanBreak(have)
+                    CanAccess = have => have.Contains("oldworld")
                 },
                 new Location
                 {
                     Name = "oldworld_cave_4",
                     Grant = "oldworld_cave_4", // randomized
                     Type = Location.RandomizeType.Area,
-                    CanAccess = have => CanDrill(have)
+                    CanAccess = have => have.Contains("oldworld") && CanDrill(have)
                 },
                 new Location
                 {
                     Name = "oldworld_cave_steampunch",
                     Grant = "oldworld_cave_steampunch", // randomized
                     Type = Location.RandomizeType.Area,
-                    CanAccess = have => CanDrill(have)
+                    CanAccess = have => have.Contains("oldworld") && CanDrill(have)
                 },
                 new Location
                 {
                     Name = "oldworld_cave_falldampeners",
                     Grant = "oldworld_cave_falldampeners", // randomized
                     Type = Location.RandomizeType.Area,
-                    CanAccess = have => CanDrill(have)
+                    CanAccess = have => have.Contains("oldworld") && CanDrill(have)
                 },
                 new Location
                 {
@@ -100,51 +107,58 @@ namespace LiveSplit.SteamWorldDig {
                 },
                 new Location
                 {
+                    Name = "vectron",
+                    Grant = "vectron", // randomized
+                    Type = Location.RandomizeType.Area,
+                    CanAccess = have => have.Contains("oldworld") && CanDrill(have)
+                },
+                new Location
+                {
                     Name = "vectron_cave_1",
                     Grant = "vectron_cave_1", // randomized
                     Type = Location.RandomizeType.Area,
-                    CanAccess = have => CanDrill(have)
+                    CanAccess = have => have.Contains("vectron")
                 },
                 new Location
                 {
                     Name = "vectron_cave_minimap",
                     Grant = "vectron_cave_minimap", // randomized
                     Type = Location.RandomizeType.Area,
-                    CanAccess = have => CanDrill(have)
+                    CanAccess = have => have.Contains("vectron")
                 },
                 new Location
                 {
                     Name = "vectron_cave_2",
                     Grant = "vectron_cave_2", // randomized
                     Type = Location.RandomizeType.Area,
-                    CanAccess = have => CanDrill(have) && have.Contains("vectron_barrier_1")
+                    CanAccess = have => have.Contains("vectron") && have.Contains("vectron_barrier_1")
                 },
                 new Location
                 {
                     Name = "vectron_cave_staticdash",
                     Grant = "vectron_cave_staticdash", // randomized
                     Type = Location.RandomizeType.Area,
-                    CanAccess = have => CanDrill(have) && have.Contains("vectron_barrier_1")
+                    CanAccess = have => have.Contains("vectron") && have.Contains("vectron_barrier_1")
                 },
                 new Location
                 {
                     Name = "vectron_cave_4",
                     Grant = "vectron_cave_4", // randomized
                     Type = Location.RandomizeType.Area,
-                    CanAccess = have => CanDrill(have) && have.Contains("vectron_barrier_1") && have.Contains("vectron_barrier_2")
+                    CanAccess = have => have.Contains("vectron") && have.Contains("vectron_barrier_1") && have.Contains("vectron_barrier_2")
                 },
                 new Location
                 {
                     Name = "vectron_cave_generator_1",
                     Grant = "vectron_cave_generator_1", // randomized
                     Type = Location.RandomizeType.Area,
-                    CanAccess = have => CanDrill(have) && have.Contains("vectron_barrier_1") && have.Contains("vectron_barrier_2")
+                    CanAccess = have => have.Contains("vectron") && have.Contains("vectron_barrier_1") && have.Contains("vectron_barrier_2")
                 },
                 new Location
                 {
                     Name = "vectron_boss",
                     Grant = "vectron_boss",
-                    CanAccess = have => CanDrill(have) && have.Contains("vectron_barrier_1") && have.Contains("vectron_barrier_2") &&
+                    CanAccess = have => have.Contains("vectron") && have.Contains("vectron_barrier_1") && have.Contains("vectron_barrier_2") &&
                         have.Contains("archaea_generator") && have.Contains("oldworld_generator") && have.Contains("vectron_generator") &&
                         (have.Contains("enable_charge_jump") || have.Contains("enable_dynamite"))
                 },
