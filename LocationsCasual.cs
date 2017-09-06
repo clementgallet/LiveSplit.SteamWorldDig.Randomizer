@@ -14,6 +14,13 @@ namespace LiveSplit.SteamWorldDig {
                 },
                 new Location
                 {
+                    Name = "archaea_cave_generator_1",
+                    Grant = "archaea_cave_generator_1", // randomized
+                    Type = Location.RandomizeType.Area,
+                    CanAccess = have => have.Contains("archaea_cave_run") && have.Contains("enable_jump_double"),
+                },
+                new Location
+                {
                     Name = "archaea_cave_1",
                     Grant = "archaea_cave_1", // randomized
                     Type = Location.RandomizeType.Area,
@@ -86,6 +93,13 @@ namespace LiveSplit.SteamWorldDig {
                 },
                 new Location
                 {
+                    Name = "oldworld_cave_generator_1",
+                    Grant = "oldworld_cave_generator_1", // randomized
+                    Type = Location.RandomizeType.Area,
+                    CanAccess = have => have.Contains("oldworld_cave_falldampeners") && have.Contains("enable_jump_double"),
+                },
+                new Location
+                {
                     Name = "vectron_cave_1",
                     Grant = "vectron_cave_1", // randomized
                     Type = Location.RandomizeType.Area,
@@ -145,9 +159,9 @@ namespace LiveSplit.SteamWorldDig {
                 },
                 new Location
                 {
-                    Name = "archaea_cave_generator_1",
+                    Name = "archaea_generator",
                     Grant = "archaea_generator",
-                    CanAccess = have => have.Contains("archaea_cave_run") && have.Contains("enable_charge_jump"),
+                    CanAccess = have => have.Contains("archaea_cave_generator_1") && have.Contains("enable_charge_jump"),
                     CanEscape = have => true
                 },
                 new Location
@@ -198,9 +212,9 @@ namespace LiveSplit.SteamWorldDig {
                 },
                 new Location
                 {
-                    Name = "oldworld_cave_generator_1",
+                    Name = "oldworld_generator",
                     Grant = "oldworld_generator",
-                    CanAccess = have => have.Contains("oldworld_cave_falldampeners") && have.Contains("enable_jump_double"),
+                    CanAccess = have => have.Contains("oldworld_cave_generator_1") && have.Contains("enable_jump_double"),
                     CanEscape = have => true
                 },
                 new Location

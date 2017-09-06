@@ -121,8 +121,7 @@ namespace LiveSplit.SteamWorldDig {
                 }
 
                 // Don't randomize the boss room and the generators
-                if (!key.Contains("boss") && key != "archaea_cave_generator_1" &&
-                    key != "oldworld_cave_generator_1" && key != "oldworld")
+                if (!key.Contains("boss") && key != "oldworld")
                 {
                     areaSegments[key] = segment;
                     areaPointers[key] = ptr - 0x1C;

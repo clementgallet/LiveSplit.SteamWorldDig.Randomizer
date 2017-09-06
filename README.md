@@ -2,7 +2,7 @@
 Randomizer for the game SteamWorld Dig
 
 ## What does the Randomizer do?
-It randomizes all upgrades on upgrade podiums and all caves. Caves which are accessed from another cave, like `archaea_cave_generator_1` from `archaea_cave_run`, are not randomized.
+It randomizes all upgrades on upgrade podiums and all caves, including the cave's second exits.
 
 It also ensures that the resulting layout is possible to finish. There are two possible difficulties: `Casual` and `Speedrunner`. In `Casual` difficulty, you won't have to:
 
