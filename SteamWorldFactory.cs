@@ -11,6 +11,6 @@ namespace LiveSplit.SteamWorldDig {
 		public string UpdateName { get { return this.ComponentName; } }
 		public string UpdateURL { get { return "https://raw.githubusercontent.com/clementgallet/LiveSplit.SteamWorldDig.Randomizer/master/"; } }
 		public string XMLURL { get { return this.UpdateURL + "Components/LiveSplit.SteamWorldDig.Randomizer.Updates.xml"; } }
-		public Version Version { get { return Version.Parse("1.2"); } }
+		public Version Version { get { return Version.Parse("1.3"); } }
 	}
 }
